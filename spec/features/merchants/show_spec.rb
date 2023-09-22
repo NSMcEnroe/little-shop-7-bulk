@@ -103,4 +103,10 @@ RSpec.describe "merchant#show" do
       end
     end
   end
+
+    it "displays a link to view all discounts" do
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+
+      expect(page).to have_link("Bulk Discounts")
+  end
 end

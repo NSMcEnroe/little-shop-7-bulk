@@ -40,3 +40,7 @@
     <% end %>
   </ul>
 </section>
+
+<section id="bulk_discounts-<%= @merchants.id %>">
+  <%= link_to "Bulk Discounts", "/merchants/#{@merchants.id}/bulk_discounts" %>
+</section>
