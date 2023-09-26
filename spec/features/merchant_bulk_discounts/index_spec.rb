@@ -87,5 +87,11 @@ RSpec.describe "Merchant Bulk Discounts index" do
     expect(page).to have_button("Bulk Discount Page", :count => 2)
   end
 
+  it "has a link to create a new discount" do
+    @merchant_1 = create(:merchant)
 
+    visit "/merchants/#{@merchant_1.id}/bulk_discounts"
+
+    expect(page).to have_link("Create New Bulk Discount", href: "/merchants/#{@merchant_1.id}/bulk_discounts/new")
+  end
 end
