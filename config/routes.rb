@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/bulk_discounts/new", to: "merchant_bulk_discounts#new"
   get "/merchants/:merchant_id/bulk_discounts/:merchant_bulk_discount_id", to: "merchant_bulk_discounts#show"
   post "/merchants/:merchant_id/bulk_discounts/create", to: "merchant_bulk_discounts#create"
+  delete "/merchants/:merchant_id/bulk_discounts/:merchant_bulk_discount_id", to: "merchant_bulk_discounts#destroy"
 
   namespace :admin, path: "/admin" do
     get "", to: "dashboard#index", as: "dashboard"
