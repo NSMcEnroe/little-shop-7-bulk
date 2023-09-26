@@ -1,1 +1,7 @@
-<h1>Hello World!</h1>
+<h1>All Bulk Discounts</h1>
+
+<% @merchant.merchant_bulk_discounts.each do |merchant_bulk_discount| %>
+  <p>Bulk Discount Percentage: <%= merchant_bulk_discount.percentage %></p>
+  <p>Bulk Discount Minimum Quality: <%= merchant_bulk_discount.min_quality %></p>
+  <%= button_to "Bulk Discount Page", "/merchants/#{@merchant.id}/merchant_bulk_discounts/#{merchant_bulk_discount.id}" %>
+  <% end %>
