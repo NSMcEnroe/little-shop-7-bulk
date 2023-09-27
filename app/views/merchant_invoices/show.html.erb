@@ -17,6 +17,9 @@
     <section id="invoice_item-<%= invoice_item.id %>">
       <ul>
         <%= render partial: "invoice_items_details", locals: { invoice_item: invoice_item} %>
+        <% if invoice_item.discount != nil %>
+          <%= link_to "Bulk Discount Applied", merchant_bulk_discount_path(@merchant, invoice_item.discount) %>
+        <%end%>
             <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
               <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
               <%= f.label :status %>
