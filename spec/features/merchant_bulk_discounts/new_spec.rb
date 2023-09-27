@@ -8,8 +8,8 @@ RSpec.describe "Merchant Bulk Discounts new page" do
 
     click_link("Create New Bulk Discount")
 
-    expect(page).to have_field("percentage")
-    expect(page).to have_field("min_quality")
+    expect(page).to have_field("merchant_bulk_discount[percentage]")
+    expect(page).to have_field("merchant_bulk_discount[min_quality]")
     expect(page).to have_button("Create New Bulk Discount")
   end
 
@@ -18,12 +18,12 @@ RSpec.describe "Merchant Bulk Discounts new page" do
 
     visit "/merchants/#{merchant_1.id}/bulk_discounts/new"
 
-    fill_in "percentage", with: 10
-    fill_in "min_quality", with: 15
+    fill_in "merchant_bulk_discount[percentage]", with: 10
+    fill_in "merchant_bulk_discount[min_quality]", with: 15
 
     click_button("Create New Bulk Discount")
 
-    expect(page).to have_current_path("/merchants/#{merchant_1.id}/bulk_discounts")
+    expect(page).to have_current_path(merchant_bulk_discounts_path(merchant_1))
     expect(page).to have_content(10)
     expect(page).to have_content(15)
   end

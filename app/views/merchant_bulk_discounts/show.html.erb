@@ -3,4 +3,4 @@
   <li>Percentage Discount: <%= @merchant_bulk_discount.percentage %></li>
 </ul>
 
-<%= link_to "Edit Bulk Discount", "/merchants/#{@merchant.id}/bulk_discounts/#{@merchant_bulk_discount.id}/edit" %>
+<%= link_to "Edit Bulk Discount", edit_merchant_bulk_discount_path(@merchant, @merchant_bulk_discount) %>

@@ -5,44 +5,46 @@ class MerchantBulkDiscountsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:merchant_id])
-    @merchant_bulk_discount = MerchantBulkDiscount.find(params[:merchant_bulk_discount_id])
+    @merchant_bulk_discount = MerchantBulkDiscount.find(params[:id])
   end
 
   def new
     @merchant = Merchant.find(params[:merchant_id])
+    @merchant_bulk_discount = MerchantBulkDiscount.new
   end
 
   def edit
     @merchant = Merchant.find(params[:merchant_id])
-    @merchant_bulk_discount = MerchantBulkDiscount.find(params[:merchant_bulk_discount_id])
+    @merchant_bulk_discount = MerchantBulkDiscount.find(params[:id])
   end
 
   def update
     @merchant = Merchant.find(params[:merchant_id])
-    @merchant_bulk_discount = MerchantBulkDiscount.find(params[:merchant_bulk_discount_id])
+    @merchant_bulk_discount = MerchantBulkDiscount.find(params[:id])
 
-    @merchant.update(merchant_bulk_discount_params)
-    redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts/#{params[merchant_bulk_discount_id]}"
+    if @merchant_bulk_discount.update(merchant_bulk_discount_params)
+      redirect_to merchant_bulk_discounts_path(@merchant)
+    else
+      flash[:alert] = "Error: #{error_message(@merchant_bulk_discount.errors)}"
+      render :edit
+    end
   end
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    @merchant_bulk_discount = @merchant.merchant_bulk_discounts.create(
-      percentage: params[:percentage],
-      min_quality: params[:min_quality]
-    )
-
-    redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts"
+    @merchant_bulk_discount = @merchant.merchant_bulk_discounts.create(merchant_bulk_discount_params)
+    redirect_to merchant_bulk_discounts_path(@merchant)
   end
 
   def destroy
-    MerchantBulkDiscount.find(params[:merchant_bulk_discount_id]).destroy
-    redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts"
+    @merchant = Merchant.find(params[:merchant_id])
+    MerchantBulkDiscount.find(params[:id]).destroy
+    redirect_to merchant_bulk_discounts_path(@merchant)
   end
 
   private
 
   def merchant_bulk_discount_params
-    params.permit(:percentage, :min_quality)
+    params.require(:merchant_bulk_discount).permit(:percentage, :min_quality)
   end
 end

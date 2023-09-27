@@ -1,9 +1,9 @@
 <h1> Create a new discount: </h1>
 
-<%= form_with url: "/merchants/#{@merchant.id}/bulk_discounts/create", method: :post, data: { turbo: false } do |form| %>
+<%= form_with model: @merchant_bulk_discount, url: merchant_bulk_discounts_path(@merchant), method: :post, data: { turbo: false } do |form| %>
   <%= form.label :percentage, "Percentage:" %>
   <%= form.number_field :percentage %><br>
-  <%= form.label :min_quality, "Minimum Quality:" %>
+  <%= form.label :min_quality, "Minimum Quantity:" %>
   <%= form.number_field :min_quality%><br>
   <%= form.submit "Create New Bulk Discount" %>
 <% end %>
