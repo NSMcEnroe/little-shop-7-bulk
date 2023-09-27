@@ -24,9 +24,6 @@ class MerchantBulkDiscountsController < ApplicationController
 
     if @merchant_bulk_discount.update(merchant_bulk_discount_params)
       redirect_to merchant_bulk_discounts_path(@merchant)
-    else
-      flash[:alert] = "Error: #{error_message(@merchant_bulk_discount.errors)}"
-      render :edit
     end
   end
 

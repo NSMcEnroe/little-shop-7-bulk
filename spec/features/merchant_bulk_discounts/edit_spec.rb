@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Merchant Bulk Discounts update page" do
-  
-
   it "displays a form that is pre-populated and changes when hitting submit" do
     @merchant_1 = create(:merchant)
   
@@ -22,7 +20,4 @@ RSpec.describe "Merchant Bulk Discounts update page" do
     expect(page).to have_content(12) 
     expect(page).to have_content(13) 
   end
-  
-
-  
 end
