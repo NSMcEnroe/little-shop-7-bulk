@@ -4,7 +4,9 @@ RSpec.describe "Merchant Bulk Discounts new page" do
   it "displays a form for a new discount" do
     merchant_1 = create(:merchant)
 
-    visit "/merchants/#{merchant_1.id}/bulk_discounts/new"
+    visit "/merchants/#{merchant_1.id}/bulk_discounts"
+
+    click_link("Create New Bulk Discount")
 
     expect(page).to have_field("percentage")
     expect(page).to have_field("min_quality")

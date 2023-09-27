@@ -110,4 +110,5 @@ RSpec.describe "Merchant Bulk Discounts index" do
     expect(page).to_not have_content(@bulk_discount_1.percentage)
   end
 
+  
 end
