@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   get "/items/:id/edit", to: "items#edit"
   patch "/items/:id", to: "items#update"
 
-  get "/merchants/:merchant_id/bulk_discounts", to: "merchant_bulk_discounts#index"
+  resources :merchants do
+    resources :bulk_discounts, controller: "merchant_bulk_discounts"
+  end
 
   namespace :admin, path: "/admin" do
     get "", to: "dashboard#index", as: "dashboard"

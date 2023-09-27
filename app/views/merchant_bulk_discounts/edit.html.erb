@@ -1,0 +1,9 @@
+<h1>Update Bulk Discount</h1>
+
+<%= form_with model: @merchant_bulk_discount, url: "/merchants/#{@merchant.id}/bulk_discounts/#{@merchant_bulk_discount.id}", method: :patch, data: { turbo: false } do |form| %>
+  <%= form.label :percentage, "Percentage:" %>
+  <%= form.number_field :percentage, value: @merchant_bulk_discount.percentage %><br>
+  <%= form.label :min_quality, "Minimum Quantity:" %>
+  <%= form.number_field :min_quality, value: @merchant_bulk_discount.min_quality %><br>
+  <%= form.submit "Edit Bulk Discount" %>
+<% end %>

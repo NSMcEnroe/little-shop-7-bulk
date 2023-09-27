@@ -4,11 +4,22 @@
 <h2>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100) %></h2>
 </section>
 
+<section>
+<h2>My Revenue: <%= number_to_currency(@invoice.specific_revenue(@merchant) / 100) %></h2>
+</section>
+
+<section>
+<h2>My Discounted Revenue: <%= number_to_currency(@invoice.discount_revenue(@merchant) / 100) %></h2>
+</section>
+
 <section id="invoice_item_details">
   <% @specific_invoice_items.each do |invoice_item| %>
     <section id="invoice_item-<%= invoice_item.id %>">
       <ul>
         <%= render partial: "invoice_items_details", locals: { invoice_item: invoice_item} %>
+        <% if invoice_item.discount != nil %>
+          <%= link_to "Bulk Discount Applied", merchant_bulk_discount_path(@merchant, invoice_item.discount) %>
+        <%end%>
             <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
               <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
               <%= f.label :status %>
