@@ -31,4 +31,16 @@ class Invoice < ApplicationRecord
       end
     end
   end
+  
+  def unique_merchants
+    invoice_items.joins(item: :merchant).distinct.pluck('merchants.id')
+  end
+
+  def discounted_invoice_revenue
+    unique_merchants.sum do |merchant_id|
+      merchant = Merchant.find(merchant_id)
+      discount_revenue(merchant)
+    end
+  end
+
 end

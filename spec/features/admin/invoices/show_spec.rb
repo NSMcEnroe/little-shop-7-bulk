@@ -91,4 +91,29 @@ RSpec.describe "the admin invoices show page" do
       end
     end
   end
+
+  it "displays the discounted revenue of an invoice" do
+    @merchant_1 = create(:merchant)
+    @merchant_2 = create(:merchant)
+    @customer_1 = create(:customer)
+    
+    @item_1 = create(:item, merchant_id: @merchant_1.id)
+    @item_2 = create(:item, merchant_id: @merchant_2.id)
+    @item_3 = create(:item, merchant_id: @merchant_1.id)
+    @item_4 = create(:item, merchant_id: @merchant_1.id)
+    
+    @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+  
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 25, unit_price: 1000, status: 1)
+    @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, unit_price: 2000, status: 1)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, quantity: 10, unit_price: 3000, status: 1)
+    @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, unit_price: 3000, status: 1)
+
+    @bulk_discount_1 = create(:merchant_bulk_discount, merchant_id: @merchant_1.id, percentage: 20, min_quality: 20)
+    @bulk_discount_1 = create(:merchant_bulk_discount, merchant_id: @merchant_1.id, percentage: 10, min_quality: 10)
+
+    visit "/admin/invoices/#{@invoice_1.id}"
+
+    expect(page).to have_content("Discounted Revenue for Invoice #{@invoice_1.id} is: $520.00")
+  end
 end

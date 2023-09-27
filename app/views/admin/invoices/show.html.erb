@@ -24,5 +24,6 @@
   <h2>Revenue Generated</h2>
   <p>Total Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_revenue / 100) %></p>
 </section>
+  <p>Total Discounted Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.discounted_invoice_revenue/ 100) %></p>
 
 

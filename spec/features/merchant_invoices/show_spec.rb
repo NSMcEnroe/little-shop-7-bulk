@@ -168,8 +168,6 @@ RSpec.describe "the merchant invoices show page" do
 
       visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-      save_and_open_page
-
       expect(page).to have_link("Bulk Discount Applied", :count => 2)
     end
   end
